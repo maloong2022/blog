@@ -60,6 +60,12 @@ const { activeNav } = Astro.props;
               About
             </a>
           </li>
+
+          <li>
+            <a href="https://maloong.com" class={activeNav === "about" ? "active" : ""}>
+              Profolio
+            </a>
+          </li>
           <li>
             <LinkButton
               href="/search"
