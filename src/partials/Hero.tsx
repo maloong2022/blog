@@ -3,26 +3,26 @@ import {
   HeroAvatar,
   HeroSocial,
   Section,
-} from 'astro-boilerplate-components';
+} from "astro-boilerplate-components";
 
 const Hero = () => (
   <Section>
     <HeroAvatar
       title={
         <>
-          Hi there, I'm <GradientText>Ixartz</GradientText> 👋
+          Hi there, I'm <GradientText>Maloong</GradientText> 👋
         </>
       }
       description={
         <>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus{' '}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus{" "}
           <a className="text-cyan-400 hover:underline" href="/">
             malesuada
-          </a>{' '}
-          nisi tellus, non imperdiet nisi tempor at. Lorem ipsum dolor sit amet,{' '}
+          </a>{" "}
+          nisi tellus, non imperdiet nisi tempor at. Lorem ipsum dolor sit amet,{" "}
           <a className="text-cyan-400 hover:underline" href="/">
             consectetur
-          </a>{' '}
+          </a>{" "}
           adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
         </>
       }
