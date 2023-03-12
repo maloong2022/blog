@@ -4,7 +4,7 @@ export const SITE = {
   website: "https://blog.maloong.com/",
   author: "Maloong",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
-  title: "Maloong's Blog",
+  title: "Maloong",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerPage: 6,
