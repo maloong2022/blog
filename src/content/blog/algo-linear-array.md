@@ -1,6 +1,6 @@
 ---
 author: Maloong
-pubDatetime: 2022-09-23T15:22:00Z
+pubDatetime: 2023-03-12T15:22:00Z
 title: Algorithm About Array
 postSlug: algo-linear-array
 featured: true
@@ -10,7 +10,7 @@ tags:
   - linear
   - array
 ogImage: ""
-description: The Algorithm of array.
+description: It's about the data struct of linear -- array and the Algorithm on it.
 ---
 
 ### 数组
