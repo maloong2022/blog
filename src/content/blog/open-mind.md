@@ -7,7 +7,7 @@ featured: true
 draft: false
 tags:
   - mind
-ogImage: ""
+ogImage: "https://s2.loli.net/2023/03/22/tTQKdWGx1JM2HZp.png"
 description: 正因为你优秀，所以难以卓越！
 ---
 
