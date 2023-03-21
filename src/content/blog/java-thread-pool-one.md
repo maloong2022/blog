@@ -12,6 +12,8 @@ ogImage: ""
 description: Java自带线程池的原理和源码分析。
 ---
 
+## Table of contents
+
 ### ThreadPoolExecutor
 
 线程池的核心目的就是资源的利用，避免重复创建线程带来的资源消耗。因此引入一个池化技术的思想，避免重复创建、销毁带来的性能开销。
