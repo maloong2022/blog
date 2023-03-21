@@ -12,15 +12,21 @@ ogImage: ""
 description: Java自带线程池的原理和源码分析。
 ---
 
+---
+
+# Java 线程池
+
+---
+
+Java 自带线程池的原理和源码分析。
+
 ## Table of contents
 
-<!-- the rest of the post -->
-
-### ThreadPoolExecutor
+## ThreadPoolExecutor
 
 线程池的核心目的就是资源的利用，避免重复创建线程带来的资源消耗。因此引入一个池化技术的思想，避免重复创建、销毁带来的性能开销。
 
-#### 手写一个线程池
+### 手写一个线程池
 
 ![](https://s2.loli.net/2023/03/22/nWERD4AeihHyfOp.png)
 
@@ -150,9 +156,9 @@ public class ThreadPoolTrader implements Executor {
 
 这个代码有很多问题没有考虑，如线程池状态呢，不可能一直奔跑呀！？、线程池的锁呢，不会有并发问题吗？、线程池拒绝后的策略呢？，这些问题都没有在主流程解决，也正因为没有这些流程，所以上面的代码才更容易理解。
 
-### 线程池源码分析
+## 线程池源码分析
 
-#### 类图
+### 类图
 
 ![](https://s2.loli.net/2023/03/22/xRQhEOTFGqXgHo1.png)
 
@@ -172,7 +178,7 @@ public class ThreadPoolTrader implements Executor {
   newFixedThreadPool 、 newCachedThreadPool 、
   newScheduledThreadPool 、 newSingleThreadExecutor 。
 
-#### 线程状态
+### 线程状态
 
 ![](https://s2.loli.net/2023/03/22/k7vzDa9SIyolciF.png)
 
@@ -191,7 +197,7 @@ public class ThreadPoolTrader implements Executor {
 
 在 ThreadPoolExecutor 线程池实现类中，使用 AtomicInteger 类型的 ctl 记录线程池状态和线程池数量。在一个类型上记录多个值，它采用的分割数据区域，高 3 位记录状态，低 29 位存储线程数量，默认 RUNNING 状态，线程数为 0 个。
 
-#### 线程池状态
+### 线程池状态
 
 ![线程池状态流转](https://s2.loli.net/2023/03/22/K7VXzs9iapIZtbU.png)
 
@@ -206,7 +212,7 @@ public class ThreadPoolTrader implements Executor {
   terminated() 方法进入 TERMINATED 状态。
 - TERMINATED ：终止状态 terminated() 方法调用结束后的状态。
 
-#### 提交线程（execute）
+### 提交线程（execute）
 
 ![提交线程流程图](https://s2.loli.net/2023/03/22/kW5XpsvxiVzdgBu.png)
 
@@ -266,7 +272,7 @@ public void execute(Runnable command) {
 - 最后就是再次尝试添加任务执行，此时方法 addWorker 的第二个入参是 false
   最终会影响添加执行任务数量判断。如果添加失败则进行拒绝策略。
 
-#### 添加执行任务(addWorker)
+### 添加执行任务(addWorker)
 
 ![添加执行任务逻辑流程](https://s2.loli.net/2023/03/22/whcMtX52E8x4olu.png)
 
@@ -358,7 +364,7 @@ private boolean addWorker(Runnable firstTask, boolean core) {
   最后如果判断没有启动成功，则需要执行 addWorkerFailed 方法，剔除到线程方
   法等操作。
 
-#### 执行线程(runWorker)
+### 执行线程(runWorker)
 
 ```java
 final void runWorker(Worker w) {
@@ -411,7 +417,7 @@ final void runWorker(Worker w) {
 - beforeExecute 、 afterExecute ，线程执行的前后做一些统计信息。
 - 另外这里的锁操作是 Worker 继承 AQS 自己实现的不可 重入的独占锁。
 
-#### 队列获取任务(getTask)
+### 队列获取任务(getTask)
 
 ```java
 private Runnable getTask() {
