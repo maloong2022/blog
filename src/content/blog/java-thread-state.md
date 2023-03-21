@@ -12,12 +12,6 @@ ogImage: ""
 description: Java 线程状态和状态的转化
 ---
 
----
-
-# Java 线程状态
-
----
-
 Java 线程状态和状态的转化
 
 ## Table of contents

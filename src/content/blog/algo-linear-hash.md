@@ -13,12 +13,6 @@ ogImage: ""
 description: It's about the data struct of linear -- hash and the Algorithm on it.
 ---
 
----
-
-# 线性数据结构之哈希表
-
----
-
 It's about the data struct of linear -- hash and the Algorithm on it.
 
 ## Table of contents

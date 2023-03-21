@@ -13,12 +13,6 @@ ogImage: ""
 description: It's about the data struct of linear -- queue and the Algorithm on it.
 ---
 
----
-
-# 线性数据结构之队列
-
----
-
 It's about the data struct of linear -- queue and the Algorithm on it.
 
 ## Table of contents
