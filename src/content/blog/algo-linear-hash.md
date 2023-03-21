@@ -13,7 +13,17 @@ ogImage: ""
 description: It's about the data struct of linear -- hash and the Algorithm on it.
 ---
 
-### 哈希表
+---
+
+# 线性数据结构之哈希表
+
+---
+
+It's about the data struct of linear -- hash and the Algorithm on it.
+
+## Table of contents
+
+## 哈希表
 
 希表的关键点
 
@@ -29,7 +39,7 @@ description: It's about the data struct of linear -- hash and the Algorithm on i
 - 好的哈希函数的设计；
 - 哈希冲突的解决策略：开散列等等。
 
-### 无序集合
+## 无序集合
 
 集合的特点和分类
 
@@ -43,7 +53,7 @@ description: It's about the data struct of linear -- hash and the Algorithm on i
 - 有序映射，key 是按照大小排列，一般也是基于平衡二叉搜索树实现；
 - 无序映射，一般用哈希表实现。
 
-### 实战
+## 实战
 
 1. Two Sum
 

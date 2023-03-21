@@ -13,21 +13,31 @@ ogImage: ""
 description: It's about the data struct of linear -- linkedlist and the Algorithm on it.
 ---
 
-### 链表
+---
 
-#### 性质
+# 线性数据结构之链表
+
+---
+
+It's about the data struct of linear -- linkedlist and the Algorithm on it.
+
+## Table of contents
+
+## 链表
+
+### 性质
 
 - 内存可以不连续
 - 插入删除快，查询慢
 - 占用空间单链表是数组的两倍(需要存放 next 指针)，双链表为三倍。
 
-#### 关键点
+### 关键点
 
 - 熟练离散结点的结构设计
 - 单向/双向链表的插入，删除等操作模版
 - 清楚保护结点的运用
 
-#### 时间复杂度
+### 时间复杂度
 
 | 操作                                                                       | 复杂度 |
 | -------------------------------------------------------------------------- | ------ |
@@ -38,7 +48,7 @@ description: It's about the data struct of linear -- linkedlist and the Algorith
 | Prepend(push front)                                                        | O(1)   |
 | Note：表中都是值知道插入或删除地址，而不是仅仅只知道元素，需要查询得到地址 |
 
-### 实战
+## 实战
 
 206. Reverse Linked List
 
@@ -540,7 +550,7 @@ class Solution {
 }
 ```
 
-### Link List Move Model
+## Link List Move Model
 
 ```java
 while(head != null) {
@@ -548,7 +558,7 @@ while(head != null) {
 }
 ```
 
-### Link List Reverse Model
+## Link List Reverse Model
 
 ```java
 ListNode last = null;

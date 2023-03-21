@@ -13,7 +13,17 @@ ogImage: ""
 description: It's about the data struct of linear -- stack and the Algorithm on it.
 ---
 
-### 栈(stack)
+---
+
+# 线性数据结构之栈
+
+---
+
+It's about the data struct of linear -- stack and the Algorithm on it.
+
+## Table of contents
+
+## 栈(stack)
 
 栈的关键点
 
@@ -29,11 +39,11 @@ Last in - First out
 - 出栈 O(1)（栈尾部弹出）
 - 访问 O(1) （访问栈顶）
 
-### Java JDK
+## Java JDK
 
 Stack
 
-### 实战
+## 实战
 
 20. Valid Parentheses
 

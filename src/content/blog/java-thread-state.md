@@ -12,7 +12,17 @@ ogImage: ""
 description: Java 线程状态和状态的转化
 ---
 
-### Thread 状态关系
+---
+
+# Java 线程状态
+
+---
+
+Java 线程状态和状态的转化
+
+## Table of contents
+
+## Thread 状态关系
 
 Java 的线程状态描述在枚举类 java.lang.Thread.State 中，共包括如下五种状态：
 
@@ -44,19 +54,19 @@ public enum State { NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED; 
 - Terminated ：这个是终止状态，从 New 到 Terminated 是不可逆的。一般是程
   序流程正常结束或者发生了异常。
 
-### Thread 方法使用
+## Thread 方法使用
 
 一般情况下 Thread 中最常用的方法就是 start 启动，除此之外一些其他方法可能在平常的开发中用的不多，但这些方法在一些框架中却经常出现。
 
-#### yield
+### yield
 
 yield 方法让出 CPU，但不一定，一定让出！。这种可能会用在一些同时启动的线程中，按照优先级保证重要线程的执行，也可以是其他一些特殊的业务场景（例如这个线程内容很耗时，又不那么重要，可以放在后面）。
 
-#### wait & notifyall
+### wait & notifyall
 
 wait 和 notify/nofityall，是一对方法，有一个等待，就会有一个叫醒，否则程序就夯在那不动了。
 
-#### join
+### join
 
 join 是两个线程的合并吗？不是的！
 join 是让线程进入 wait ，当线程执行完毕后，会在 JVM 源码中找到，它执行完毕后，其实执行 notify，也就是 等待 和 叫醒 操作。

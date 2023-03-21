@@ -13,16 +13,26 @@ ogImage: ""
 description: It's about the data struct of linear -- array and the Algorithm on it.
 ---
 
-### 数组
+---
 
-#### 性质
+# 线性数据结构之数组
+
+---
+
+It's about the data struct of linear -- array and the Algorithm on it.
+
+## Table of contents
+
+## 数组
+
+### 性质
 
 基本特点：支持随机访问
 关键：索引与寻址
 内存形式：一段连续的存储空间
 查询快插入删除慢，需要移动元素(除非在末尾删除和插入)。
 
-#### 时间复杂度
+### 时间复杂度
 
 | 操作                | 时间复杂度 | 备注         |
 | ------------------- | ---------- | ------------ |
@@ -32,7 +42,7 @@ description: It's about the data struct of linear -- array and the Algorithm on 
 | Append(push back)   | O(1)       |              |
 | Prepend(push front) | O(n)       |              |
 
-### 实战
+## 实战
 
 26. Remove Duplicates from Sorted Array
 
@@ -190,7 +200,7 @@ class Solution {
 }
 ```
 
-### Fliter modle
+## Fliter modle
 
 apply for: The relative order of the elements should be kept the same.
 
@@ -205,7 +215,7 @@ for(int i=0; i < arr.size(); i++){
 return n;
 ```
 
-### Merge modle
+## Merge modle
 
 ```java
 for (int k = (m+n)-1;k>=0;k--){
@@ -284,7 +294,7 @@ class Solution {
 }
 ```
 
-### resizable array
+## resizable array
 
 如何实现一个变长数组
 
@@ -306,9 +316,9 @@ class Solution {
 
 👀JDK： ArrayList
 
-### Java 实现自定义动态数组
+## Java 实现自定义动态数组
 
-#### 数组基础回顾
+### 数组基础回顾
 
 1、数组是一种常见的数据结构，用来存储同一类型值的集合
 
@@ -332,7 +342,7 @@ int[] array = new int[]{11,22,33};
 
 **总结——数组适用于读操作多，写操作少的场景**
 
-#### 动态数组的设计
+### 动态数组的设计
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6301410643de4324bb8a059b29dfc942~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.image)
 

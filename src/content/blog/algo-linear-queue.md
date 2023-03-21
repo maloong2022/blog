@@ -13,7 +13,17 @@ ogImage: ""
 description: It's about the data struct of linear -- queue and the Algorithm on it.
 ---
 
-### 队列(queue) && 双端队列(deque)
+---
+
+# 线性数据结构之队列
+
+---
+
+It's about the data struct of linear -- queue and the Algorithm on it.
+
+## Table of contents
+
+## 队列(queue) && 双端队列(deque)
 
 Last in - Last out
 First in - First out
@@ -30,7 +40,7 @@ First in - First out
 - 出队 O(1)（队列头部弹出，双端队列支持尾部弹出）
 - 访问 O(1) （访问队头，双端队列可以同时访问队头和队尾）
 
-### 优先队列(priority queue)
+## 优先队列(priority queue)
 
 优先队列的关键点
 
@@ -46,12 +56,12 @@ First in - First out
 
 Note: 插入：一般是 O(logN)(二叉堆)，一些高级数据结构可以做到 O(1)(配对堆，斐波那契堆)
 
-### Java JDK
+## Java JDK
 
 - Queue,Deque 可以用 LinkedList 实现
 - PrioriyQueue
 
-### 实战
+## 实战
 
 225. Implement Stack using Queues
 
