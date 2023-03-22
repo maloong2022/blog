@@ -52,7 +52,6 @@ grant codebase "file:${java.home}/../lib/tools.jar" { permission java.security.A
 
 ```bash
 C:\Program Files\Java\jdk1.8.0_161\bin>jstatd -J-Djava.security.policy=jstatd.all.policy
-
 ```
 
 顺利的话现在就可以查看原创机器 JVM 信息了。
@@ -76,7 +75,7 @@ jcmd <pid | main class> <command ...|PerfCounter.print|-f file>
 ### jcmd pid VM.flags,查看 JVM 启动参数
 
 ```bash
-jcmd 54465 VM.flags                                                            ─╯
+jcmd 54465 VM.flags
 
 54465:
 -XX:CICompilerCount=2 -XX:CompileCommand=exclude,com/intellij/openapi/vfs/impl/FileP
@@ -97,7 +96,7 @@ terleaving
 ### jcmd pid VM.uptime，查看 JVM 运行时长
 
 ```bash
-jcmd 54465 VM.uptime                                                           ─╯
+jcmd 54465 VM.uptime
 
 54465:
 18974.783 s
@@ -106,16 +105,16 @@ jcmd 54465 VM.uptime                                                           �
 ### jcmd pid PerfCounter.print，查看 JVM 性能相关参数
 
 ```bash
-jcmd 54465 PerfCounter.print                                                   ─╯
+jcmd 54465 PerfCounter.print
 ```
 
 ### jcmd pid GC.class_histogram，查看系统中类的统计信息
 
 ```bash
-jcmd 37952 GC.class_histogram                                                                                                                    ─╯
+jcmd 37952 GC.class_histogram
 37952:
 
- num     #instances         #bytes  class name
+num     #instances         #bytes  class name
 ----------------------------------------------
    1:          1376         155440  [C
    2:           585          66984  java.lang.Class
@@ -132,7 +131,7 @@ jcmd 37952 GC.class_histogram                                                   
 ### jcmd pid Thread.print，查看线程堆栈信息
 
 ```bash
-jcmd 37952 Thread.print                                                                                                                          ─╯
+jcmd 37952 Thread.print
 ```
 
 ### jcmd pid VM.system_properties，查看 JVM 系统参数
@@ -206,7 +205,7 @@ jstat 的监视选项还是非常多的，但最常用的主要有上面这些�
 ### jstat -class，类加载统计
 
 ```bash
-jstat -class 37952                                                                                                                               ─╯
+jstat -class 37952
 
 Loaded  Bytes  Unloaded  Bytes     Time
 602  1209.2        0     0.0       0.11
@@ -221,7 +220,8 @@ Loaded  Bytes  Unloaded  Bytes     Time
 ### jstat -compiler，编译统计
 
 ```bash
-jstat -compiler 37952                                                                                                                            ─╯
+jstat -compiler 37952
+
 Compiled Failed Invalid   Time   FailedType FailedMethod
     73      0       0     0.03          0
 ```
@@ -237,6 +237,7 @@ Compiled Failed Invalid   Time   FailedType FailedMethod
 
 ```bash
 jstat -gc 37952
+
 S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT
 10752.0 10752.0  0.0    0.0   65536.0   3932.2   175104.0     0.0     4480.0 779.9  384.0   76.4       0    0.000   0      0.000    0.000
 ```
@@ -331,7 +332,7 @@ MC       MU      CCSC     CCSU       OC          OU       YGC    FGC    FGCT    
 ### jstat -gcoldcapacity，老年代内存统计
 
 ```bash
-jstat -gcoldcapacity 37952                                                                                                                                                                                 ─╯
+jstat -gcoldcapacity 37952
 
 OGCMN       OGCMX        OGC         OC       YGC   FGC    FGCT     GCT
 175104.0   2796544.0    175104.0    175104.0     0     0    0.000    0.000
@@ -387,7 +388,7 @@ S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT
 ### jstat -printcompilation，JVM 编译方法统计
 
 ```bash
-jstat -printcompilation 37952                                                                                                                                                                              ─╯
+jstat -printcompilation 37952
 
 Compiled  Size  Type Method
     30     83    1 java/lang/String <init>
@@ -413,199 +414,4 @@ jmap [ option ] pid
 - core ：需要打印配置信息的核心文件
 - server id ：可选的唯一 id ，如果相同的远程主机上运行了多台调试服务器，用此选
   项参数标识服务 器
-- remote server IP or hostname 远程调试服务器的 IP 地址或主机名
-
-### 选项列表
-
-| 选项           | 描述                                                                       |
-| -------------- | -------------------------------------------------------------------------- |
-| -dump          | 生成 Java 堆转储快照。                                                     |
-| -finalizerinfo | 显示在 F Queue 中等待 Finalizer 线程执行 finalize 方法的对象。 Linux 平台  |
-| -heap          | 显示 Java 堆详细信息，比如：用了哪种回收器、参数配置、分代情况。Linux 平台 |
-| -histo         | 显示堆中对象统计信息，包括类、实例数量、合计容量                           |
-| -permstat      | 显示永久代内存状态， jdk1.7 ，永久代                                       |
-| -F             | 当虚拟机进程对 dump 选项没有响应式，可以强制生成快照。 Linux 平台          |
-
-### jmap，打印共享对象映射
-
-```bash
-jmap 55669
-
-Attaching to process ID 55669, please wait...
-Debugger attached successfully.
-Server compiler detected.
-JVM version is 25.161-b12
-...
-
-```
-
-### jmap -heap，堆详细信息
-
-```bash
-jmap -heap 55669
-
-Attaching to process ID 55669, please wait...
-Debugger attached successfully.
-Server compiler detected.
-JVM version is 25.161-b12
-
-using thread-local object allocation.
-Parallel GC with 8 thread(s)
-Heap Configuration:
-    MinHeapFreeRatio = 0
-    MaxHeapFreeRatio = 100
-    MaxHeapSize = 268435456 (256.0MB)
-    NewSize = 8388608 (8.0MB)
-    MaxNewSize = 89128960 (85.0MB)
-    OldSize = 16777216 (16.0MB)
-    NewRatio = 2
-    SurvivorRatio = 8
-    MetaspaceSize = 21807104 (20.796875MB)
-    CompressedClassSpaceSize = 1073741824 (1024.0MB)
-    MaxMetaspaceSize = 17592186044415 MB
-    G1HeapRegionSize = 0 (0.0MB)
-
-```
-
-### jmap -clstats，打印加载类
-
-```bash
-jmap -clstats 55669
-
-Attaching to process ID 55669, please wait...
-Debugger attached successfully.
-Server compiler detected.
-JVM version is 25.161-b12
-finding class loader instances ..done.
-computing per loader stat ..done.
-please wait.. computing liveness........................................................
-.........liveness analysis may be inaccurate ... class_loader classes bytes parent_loader alive? type
-<bootstrap> 3779 6880779 null live <internal> 0x00000000f03853b8 57 132574 0x00000000f031aac8 live org/netbeans/StandardModule$OneModuleClassLoader@0x00000001001684f0
-0x00000000f01b9b98 0 0 0x00000000f031aac8 live org/netbeans/StandardModule$OneModuleClassLoader@0x00000001001684f0
-0x00000000f005b280 0 0 0x00000000f031aac8 live java/util/ResourceBundle$RBClassLoader@0x00000001000c6ae0
-0x00000000f01dfa98 0 0 0x00000000f031aac8 live org/netbeans/StandardModule$OneModuleClassLoader@0x00000001001684f0
-0x00000000f01ec518 79 252894 0x00000000f031aac8 live org/netbeans/StandardModule$OneModuleClassLoader@0x00000001001684f0
-
-```
-
-### jmap -dump，堆转储文件
-
-```bash
-jmap -dump:live,format=b,file=C:/Users/xiaofuge/Desktop/heap.bin 55669
-
-Dumping heap to ~/heap.bin ...
-Heap dump file created
-```
-
-## jhat 堆转储快照分析工具
-
-jhat（JVM Heap Analysis Tool），与 jmap 配合使用，用于分析 jmap 生成的堆转储快照。
-
-jhat 内置了一个小型的 http/web 服务器，可以把堆转储快照分析的结果，展示在浏览器中查看。不过用途不大，基本大家都会使用其他第三方工具。
-
-### 命令格式
-
-jhat [-stack <bool>] [-refs <bool>] [-port <port>] [-baseline <file>] [-debug <int>] [-version] [-h|-help] <file>
-
-### 命令使用
-
-```bash
-jhat -port 8090 ~/heap.bin
-
-Reading from ~/heap.bin...
-Dump file created Wed Jan 13 16:53:47 CST 2022
-Snapshot read, resolving...
-Resolving 246455 objects...
-Chasing references, expect 49 dots.................................................
-Eliminating duplicate references.................................................
-Snapshot resolved. Started HTTP server on port 8090 Server is ready.
-```
-
-打开浏览器 http://localhost:8090/
-
-## jstack Java 堆栈跟踪工具
-
-jstack（Stack Trace for Java），用于生成虚拟机当前时刻的线程快照（threaddump、javacore）。
-
-线程快照就是当前虚拟机内每一条线程正在执行的方法堆栈的集合，生成线程快照的目的通常是定位线程出现长时间停顿的原因，如：线程死锁、死循环、请求外部资源耗时较长导致挂起等。
-
-线程出现停顿时通过 jstack 来查看各个线程的调用堆栈，就可以获得没有响应的线程在搞什么鬼。
-
-### 命令格式
-
-jstack [ option ] vmid
-
-### 选项参数
-
-| 选项 | 描述                                            |
-| ---- | ----------------------------------------------- |
-| -F   | 当正常输出的请求不被响应时，强制输出线程堆栈    |
-| -l   | 除了堆栈外，显示关于锁的附加信息                |
-| -m   | 如果调用的是本地方法的话，可以显示 c/c++ 的堆栈 |
-
-### 命令使用
-
-```bash
-jstack 63946                                                                                                                                                                                                  ─╯
-
-2023-03-23 01:29:52
-Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.211-b12 mixed mode):
-
-"Attach Listener" #11 daemon prio=9 os_prio=31 tid=0x00007f939580d000 nid=0x3207 waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"Service Thread" #10 daemon prio=9 os_prio=31 tid=0x00007f9396062000 nid=0x4903 runnable [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"C1 CompilerThread3" #9 daemon prio=9 os_prio=31 tid=0x00007f9394057000 nid=0x4603 waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"C2 CompilerThread2" #8 daemon prio=9 os_prio=31 tid=0x00007f939487b000 nid=0x4a03 waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"C2 CompilerThread1" #7 daemon prio=9 os_prio=31 tid=0x00007f9394862000 nid=0x4403 waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"C2 CompilerThread0" #6 daemon prio=9 os_prio=31 tid=0x00007f9392847000 nid=0x4c03 waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE
-
-"Monitor Ctrl-Break" #5 daemon prio=5 os_prio=31 tid=0x00007f9392845000 nid=0x4203 runnable [0x0000700007b92000]
-   java.lang.Thread.State: RUNNABLE
-        at java.net.SocketInputStream.socketRead0(Native Method)
-        at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
-        at java.net.SocketInputStream.read(SocketInputStream.java:171)
-        at java.net.SocketInputStream.read(SocketInputStream.java:141)
-        at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
-        at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
-        at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
-        - locked <0x000000076ac84448> (a java.io.InputStreamReader)
-        at java.io.InputStreamReader.read(InputStreamReader.java:184)
-        at java.io.BufferedReader.fill(BufferedReader.java:161)
-        at java.io.BufferedReader.readLine(BufferedReader.java:324)
-        - locked <0x000000076ac84448> (a java.io.InputStreamReader)
-        at java.io.BufferedReader.readLine(BufferedReader.java:389)
-        at com.intellij.rt.execution.application.AppMainV2$1.run(AppMainV2.java:56)
-...
-```
-
-在验证使用的过程中，可以尝试写一个死循环的线程，之后通过 jstack 查看线程信息。
-
-## 可视化故障处理工具
-
-### console，Java 监视与管理控制台
-
-JConsole（ Java Monitoring and Management Console），是一款基于 JMX（ Java Manage-ment Extensions） 的可视化监视管理工具。
-
-它的功能主要是对系统进行收集和参数调整，不仅可以在虚拟机本身管理还可以开发在软件上，是开放的服务，有相应的代码 API 调用。
-
-```bash
-jconsole
-```
-
-### VisualVM，多合故障处理工具
-
-VisualVM（ All-in-One Java Troubleshooting Tool），是功能最强大的运行监视和故障处理工具之一。
-
-它除了常规的运行监视、故障处理外，还可以做性能分析等工作。因为它的通用性很强，对应用程序影响较小，所以可以直接接入到生产环境中。
-
-![VisualVM](https://visualvm.github.io/)
+- remote server IP or hostname 远程调试服务
