@@ -9,8 +9,10 @@ tags:
   - java
   - jvm
 ogImage: ""
-description: Oracle has two products that implement Java Platform Standard Edition (Java SE) 8, Java SE Development Kit (JDK) 8 and Java SE Runtime Environment (JRE) 8.
+description: 本文从 JDK 各个版本关于内存模型结构的演变，来了解各个区域，包括:程序计 数器、Java 虚拟机栈、本地方法栈、堆和元空间。并了解从 JDK 1.8 开始去掉方 法区引入元空间的核心目的和作用。
 ---
+
+本文从 JDK 各个版本关于内存模型结构的演变，来了解各个区域，包括:程序计 数器、Java 虚拟机栈、本地方法栈、堆和元空间。并了解从 JDK 1.8 开始去掉方 法区引入元空间的核心目的和作用。
 
 ## Table of contents
 
