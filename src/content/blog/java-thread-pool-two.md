@@ -9,11 +9,11 @@ tags:
   - java
   - thread
 ogImage: ""
-description: Java自带线程池应用分析
+description: Executors 是创建线程池的工具类，比较典型常见的四种线程池包括, newFixedThreadPool 、 newSingleThreadExecutor 、 newCachedThreadPool 、 newScheduledThreadPool。每一种都有自己特定的典型例子，可以按照每种的特 性用在不同的业务场景，也可以做为参照精细化创建线程池。但是一般大厂都不允许使用 Executors 创建线程池!这么创建的话，控制不好会出现 OOM。
 ---
 
 Executors 是创建线程池的工具类，比较典型常见的四种线程池包括: newFixedThreadPool 、 newSingleThreadExecutor 、 newCachedThreadPool 、 newScheduledThreadPool。每一种都有自己特定的典型例子，可以按照每种的特 性用在不同的业务场景，也可以做为参照精细化创建线程池。
-但是一般大厂都不允许使用 Executors 创建线程池!，这么创建的话，控制不好会出现 OOM。
+但是一般大厂都不允许使用 Executors 创建线程池!这么创建的话，控制不好会出现 OOM。
 
 ## Table of contents
 
