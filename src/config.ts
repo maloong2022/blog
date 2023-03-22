@@ -3,7 +3,7 @@ import type { SocialObjects } from "./types";
 export const SITE = {
   website: "https://blog.maloong.com/",
   author: "Maloong",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Maloong's blog.",
   title: "Maloong",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
@@ -44,9 +44,9 @@ export const SOCIALS: SocialObjects = [
   },
   {
     name: "Mail",
-    href: "mailto:yourmail@gmail.com",
+    href: "mailto:maloong2022@gmail.com",
     linkTitle: `Send an email to ${SITE.title}`,
-    active: false,
+    active: true,
   },
   {
     name: "Twitter",
