@@ -9,7 +9,7 @@ tags:
   - java
   - jvm
 ogImage: ""
-description: Oracle has two products that implement Java Platform Standard Edition(Java SE) 8: Java SE Development Kit (JDK) 8 and Java SE Runtime Environment (JRE) 8.
+description: Oracle has two products that implement Java Platform Standard Edition(Java SE) 8, Java SE Development Kit (JDK) 8 and Java SE Runtime Environment (JRE) 8.
 ---
 
 Oracle has two products that implement Java Platform Standard Edition
