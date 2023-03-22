@@ -14,6 +14,8 @@ description: 本文从 JDK 各个版本关于内存模型结构的演变，来�
 
 本文从 JDK 各个版本关于内存模型结构的演变，来了解各个区域，包括:程序计 数器、Java 虚拟机栈、本地方法栈、堆和元空间。并了解从 JDK 1.8 开始去掉方 法区引入元空间的核心目的和作用。
 
+![JVM内存模型](https://s2.loli.net/2023/03/22/4Gy1PplTvuMBN9a.png)
+
 ## Table of contents
 
 ## JDK1.6、JDK1.7、JDK1.8 内存模型演变
