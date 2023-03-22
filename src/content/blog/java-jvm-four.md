@@ -609,4 +609,4 @@ VisualVM（ All-in-One Java Troubleshooting Tool），是功能最强大的运�
 
 它除了常规的运行监视、故障处理外，还可以做性能分析等工作。因为它的通用性很强，对应用程序影响较小，所以可以直接接入到生产环境中。
 
-![VisualVM](https://visualvm.github.io/)
+[VisualVM](https://visualvm.github.io/)
