@@ -103,6 +103,10 @@ JRE 本身也是一个运行在 CPU 上的程序，用于解释执行 Java 代�
 - JVM 默认在 Server 模式下，-Xms128M、-Xmx1024M
 - JVM 默认在 Client 模式下，-Xms1M、-Xmx64M
 
+### JVM
+
+![JVM](https://s2.loli.net/2023/03/22/5nqQ6l2T8JzdAN7.png)
+
 ### JVM 结构和执行器
 
 - Class Loader:类装载器是用于加载类文件的一个子系统，其主要功能有三个: loading(加载)，linking(链接),initialization(初始化)。
