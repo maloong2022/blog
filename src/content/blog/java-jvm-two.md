@@ -1,7 +1,7 @@
 ---
 author: Maloong
 pubDatetime: 2023-03-22T14:44:00Z
-title: The JVM(II) JVM 类加载实践
+title: The JVM(II) -- JVM 类加载
 postSlug: java-jvm-classloader
 featured: false
 draft: false

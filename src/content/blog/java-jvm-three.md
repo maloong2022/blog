@@ -1,7 +1,7 @@
 ---
 author: Maloong
 pubDatetime: 2023-03-22T15:25:00Z
-title: The JVM(III) JVM内存模型
+title: The JVM(III) -- JVM内存模型
 postSlug: java-jvm-momery
 featured: false
 draft: false
