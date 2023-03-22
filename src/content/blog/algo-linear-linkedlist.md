@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-13T01:32:00Z
 title: Algorithm About LinkedList
 postSlug: algo-linear-linkedlist
-featured: true
+featured: false
 draft: false
 tags:
   - algo

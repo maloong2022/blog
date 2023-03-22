@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-21T02:00:00Z
 title: The ThreadPool of Java(I)
 postSlug: java-thread-pool
-featured: true
+featured: false
 draft: false
 tags:
   - java
