@@ -9,7 +9,7 @@ tags:
   - java
   - jvm
 ogImage: ""
-description: Oracle has two products that implement Java Platform Standard Edition (Java SE) 8, Java SE Development Kit (JDK) 8 and Java SE Runtime Environment (JRE) 8.
+description: JVM 类加载过程分为，加载、链接、初始化、使用和卸载这四个阶段。
 ---
 
 ![JVM 类加载](https://s2.loli.net/2023/03/22/ndNBfw7SE9VDvXH.png)
