@@ -1,0 +1,111 @@
+---
+author: Maloong
+pubDatetime: 2023-03-22T15:25:00Z
+title: The JVM(II) JVM内存模型
+postSlug: java-jvm-momery
+featured: false
+draft: false
+tags:
+  - java
+  - jvm
+ogImage: ""
+description: Oracle has two products that implement Java Platform Standard Edition (Java SE) 8, Java SE Development Kit (JDK) 8 and Java SE Runtime Environment (JRE) 8.
+---
+
+## Table of contents
+
+## JDK1.6、JDK1.7、JDK1.8 内存模型演变
+
+![JDK1.6、JDK1.7、JDK1.8，内存模型演变](https://s2.loli.net/2023/03/22/KYpoVHSrblcPwfC.png)
+
+各个版本的迭代都是为了更好的适应 CPU 性能提升，最大限度提 升的 JVM 运行效率。这些版本的 JVM 内存模型主要有以下差异:
+
+- JDK 1.6:有永久代，静态变量存放在永久代上。
+- JDK 1.7:有永久代，但已经把字符串常量池、静态变量，存放在堆上。逐渐的减
+  少永久代的使用。
+- JDK 1.8:无永久代，运行时常量池、类常量池，都保存在元数据区，也就是常说
+  的元空间。但字符串常量池仍然存放在堆上。
+
+## 内存模型各区域介绍
+
+### 程序计数器
+
+- 较小的内存空间、线程私有，记录当前线程所执行的字节码行号。
+- 如果执行 Java 方法，计数器记录虚拟机字节码当前指令的地址，本地方法则为 空。
+- 这一块区域没有任何 OutOfMemoryError 定义。
+
+关于程序计数器的定义，如果这样看没有感觉，我们举一个例子。
+定义一段 Java 方法的代码，这段代码是计算圆形的周长。
+
+```java
+public static float circumference(float r){
+  float pi = 3.14f;
+  float area=2*pi*r;
+  return area;
+}
+```
+
+如图是这段代码的在虚拟机中的执行过程，左侧是它的程序计数 器对应的行号。
+
+![程序计数器](https://s2.loli.net/2023/03/22/QJ3LtTPkzHyXgxR.png)
+
+- 这些行号每一个都会对应一条需要执行的字节码指令，是压栈还是弹出或是执行计算。
+- 之所以说是线程私有的，因为如果不是私有的，那么整个计算过程最终的结果也将错误。
+
+### Java 虚拟机栈
+
+- 每一个方法在执行的同时，都会创建出一个栈帧，用于存放局部变量表、操作数 栈、动态链接、方法出口、线程等信息。
+- 方法从调用到执行完成，都对应着栈帧从虚拟机中入栈和出栈的过程。
+- 最终，栈帧会随着方法的创建到结束而销毁。
+
+可能这么只从定义看上去仍然没有什么感觉，我们再找一个例子。 这是一个关于斐波那契数列(Fibonacci sequence)求值的例子，我们通过斐波那 契数列在虚拟机中的执行过程，来体会 Java 虚拟机栈的用途。
+
+斐波那契数列(Fibonacci sequence)，又称黄金分割数列、因数学家列昂纳 多·斐波那契(Leonardoda Fibonacci)以兔子繁殖为例子而引入，故又称为“兔 子数列”，指的是这样一个数列:1、1、2、3、5、8、13、21、34、......在数学 上，斐波纳契数列以如下被以递推的方法定义:F(1)=1，F(2)=1, F(n)=F(n- 1)+F(n-2)(n>=3，n∈N\*)在现代物理、准晶体结构、化学等领域，斐波纳契数 列都有直接的应用，为此，美国数学会从 1963 年起出版了以《斐波纳契数列季 刊》为名的一份数学杂志，用于专门刊载这方面的研究成果。
+
+![斐波那契数列在虚拟机栈中的执行过程](https://s2.loli.net/2023/03/22/sUjnh8zCKWb1o4M.png)
+
+- 整个这段流程，就是方法的调用和返回。在调用过程申请了操作数栈的深度和局部 变量的大小。
+- 以及相应的信息从各个区域获取并操作，其实也就是入栈和出栈的过程。
+
+### 本地方法栈
+
+- 本地方法栈与 Java 虚拟机栈作用类似，唯一不同的就是本地方法栈执行的是 Native 方法，而虚拟机栈是为 JVM 执行 Java 方法服务的。
+- 另外，与 Java 虚拟机栈一样，本地方法栈也会抛出 StackOverflowError 和 OutOfMemoryError 异常。
+- JDK1.8 HotSpot 虚拟机直接就把本地方法栈和虚拟机栈合二为一。
+
+### 堆和元空间
+
+![Java 堆区域划分](https://s2.loli.net/2023/03/22/JYDxsnWydhv251V.png)
+
+- JDK 1.8 JVM 的内存结构主要由三大块组成:堆内存、元空间和栈，Java 堆是内存 空间占据最大的一块区域。
+- Java 堆，由年轻代和年老代组成，分别占据 1/3 和 2/3。
+- 而年轻代又分为三部分，Eden、From Survivor、To Survivor，占据比例为 8:1:1，可调。
+- 另外这里我们特意画出了元空间，也就是直接内存区域。在 JDK 1.8 之后就不在堆上分配方法区了。
+- 元空间从虚拟机 Java 堆中转移到本地内存，默认情况下，元空间的大小仅受本地内存的限制，说白了也就是以后不会因为永久代空间不够而抛出 OOM 异常出现 了。jdk1.8 以前版本的 class 和 JAR 包数据存储在 PermGen 下面 ，PermGen 大 小是固定的，而且项目之间无法共用，公有的 class，所以比较容易出现 OOM 异 常。
+- 升级 JDK 1.8 后，元空间配置参数，-XX:MetaspaceSize=512M XX:MaxMetaspaceSize=1024M。
+- 可以通过 jps、jinfo 查看元空间:
+  ```bash
+  jps
+  ```
+  ```
+  66016 jps
+  32172
+  ```
+  ```bash
+  jinfo -flag MetaspaceSize 32172
+  ```
+  ```
+  -XX:MetaspaceSize=21807104
+  ```
+  ```bash
+  jinfo -flag MaxMetaspaceSize 32172
+  ```
+  ```
+  -XX:MaxMetaspaceSize=184467044073709486080
+  ```
+
+### 常量池
+
+从 JDK 1.7 开始把常量池从永久代中剥离，直到 JDK1.8 去掉了永久代。而字符串 常量池一直放在堆空间，用于存储字符串对象，或是字符串对象的引用。
+
+## jconsole 监测元空间溢出
