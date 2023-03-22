@@ -2,7 +2,7 @@
 author: Maloong
 pubDatetime: 2023-03-21T11:21:00Z
 title: The ThreadPool of Java(II)
-postSlug: java-thread-pool
+postSlug: java-thread-pool-practice
 featured: false
 draft: false
 tags:
