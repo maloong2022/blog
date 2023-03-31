@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-20T22:13:00Z
 title: 开心（open mind）
 postSlug: open-mind
-featured: true
+featured: false
 draft: false
 tags:
   - mind

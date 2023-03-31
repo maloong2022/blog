@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-12T15:22:00Z
 title: Algorithm About Array
 postSlug: algo-linear-array
-featured: true
+featured: false
 draft: false
 tags:
   - algo

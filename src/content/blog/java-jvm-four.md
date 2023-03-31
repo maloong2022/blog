@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-22T16:45:00Z
 title: The JVM(IIII) -- JVM故障处理工具
 postSlug: java-jvm-error-tools
-featured: false
+featured: true
 draft: false
 tags:
   - java

@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-13T15:34:00Z
 title: Algorithm About Hash
 postSlug: algo-linear-hash
-featured: true
+featured: false
 draft: false
 tags:
   - algo

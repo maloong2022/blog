@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-22T14:21:00Z
 title: The JVM(I)
 postSlug: java-jvm
-featured: false
+featured: true
 draft: false
 tags:
   - java

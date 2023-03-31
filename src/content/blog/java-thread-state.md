@@ -3,7 +3,7 @@ author: Maloong
 pubDatetime: 2023-03-20T22:58:00Z
 title: The State of Java Thread
 postSlug: java-thread-state
-featured: true
+featured: false
 draft: false
 tags:
   - java
