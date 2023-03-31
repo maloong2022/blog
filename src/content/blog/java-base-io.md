@@ -20,6 +20,8 @@ description: 按照流的流向分，可以分为输入流和输出流； 按照
 
 ## Table of contents
 
+## 分类结构图
+
 ![按操作方式分类结构图](https://s2.loli.net/2023/03/24/hi1EVDnXTSesa2c.png)
 
 ![IO 操作方式分类按操作对象分类结构图](https://s2.loli.net/2023/03/24/9fODtZKe65L31wB.png)
