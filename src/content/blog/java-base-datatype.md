@@ -72,13 +72,21 @@ s+=1;// 正确，相当于 s1 = (short(s1 + 1);其中有隐含的强制类型转
 
 如果 Integer 的值在-128 至 127 之间，则是去缓存里面去获取。因此上面的 i 和 j 指向的是同一个内存地址。因为 128 超过了这个缓存区域，因此第二次赋值的时候重新开辟了两个内存地址。第三次因为使用了 new 关键字，在 java 中，new 关键字会开辟新的内存空间。因此第三次赋值是开辟了新的内存空间，此时即使 i 与 j 都是 127，但是内存地址不同。
 
-这个是 Integer 的性质，跟 int 没关系，注意看 int 类型的 i=j 在值都为 128 时，输出的是 true。
+这个是 Integer 的性质，跟 int 没关系，注意看 int 类型的 i==j 在值都为 128 时，输出的是 true。
+
+对于对象引用类型：==比较的是对象的内存地址。
+
+对于基本数据类型：==比较的是值。如果整型字面量的值在-128 到 127 之间，那么自动装箱时不会 new 新的 Integer 对象，而是直接引用常量池中的 Integer 对象，
 
 ```java
 
 Integer a = new Integer(12);
 Integer b = new Integer(12);
+Integer i = 12; // 将12自动装箱成Integer类型
+int o = 12;
 System.out.println(a==b);
+System.out.println(a==o); //true a自动拆箱成int类型再和o比较
+System.out.println(a==i);
 Integer c = 129;
 Integer d = 129;
 System.out.println(c == d);
@@ -90,6 +98,8 @@ System.out.println(e==f);
 输出结果是：
 
 ```bash
+false
+true
 false
 false
 true
