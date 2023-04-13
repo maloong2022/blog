@@ -1,6 +1,6 @@
 ---
 author: Maloong🐎🐲
-pubDatetime: 2023-03-24T17:34:00Z
+pubDatetime: 2023-04-12T14:30:00Z
 title: 卷起来🐎🐲💪 -- MySQL日志系统
 postSlug: mysql-base-logsystem
 featured: false
@@ -10,7 +10,6 @@ tags:
 ogImage: ""
 description: MySQL 可以恢复到半个月内任意一秒的状态。MySQL 里面最重要的两个日志，即物理日志 redo log 和逻辑日志 binlog。Redo log 记录这个页 “做了什么改动”。Binlog 有两种模式，statement 格式的话是记 sql 语句， row 格式会记录行的内容，记两条，更新前和更新后都有。
 ---
-
 经常听 DBA 同事说，MySQL 可以恢复到半个月内任意一秒的状态，惊叹的同时，你是不是心中也会不免会好奇，这是怎样做到的呢？
 
 一条更新语句的执行流程又是怎样的呢？
