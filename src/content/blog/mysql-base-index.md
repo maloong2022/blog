@@ -307,6 +307,7 @@ select * from geek where c=N order by b limit 1;
 
 表记录
 
+```sql
 –a--|–b--|–c--|–d--
 
 1 2 3 d
@@ -320,9 +321,11 @@ select * from geek where c=N order by b limit 1;
 2 2 2 d
 
 2 3 4 d
+```
 
 主键 a，b 的聚簇索引组织顺序相当于 order by a,b ，也就是先按 a 排序，再按 b 排序，c 无序。索引 ca 的组织是先按 c 排序，再按 a 排序，同时记录主键。
 
+```sql
 –c--|–a--|–主键部分b--
 
 2 1 3
@@ -336,11 +339,13 @@ select * from geek where c=N order by b limit 1;
 3 2 1
 
 4 2 3
+```
 
 这个跟索引 c 的数据是一模一样的。
 
 索引 cb 的组织是先按 c 排序，在按 b 排序，同时记录主键
 
+```sql
 –c--|–b--|–主键部分a--
 
 2 2 2
@@ -354,5 +359,6 @@ select * from geek where c=N order by b limit 1;
 3 4 1
 
 4 3 2
+```
 
 所以，结论是 ca 可以去掉，cb 需要保留。
