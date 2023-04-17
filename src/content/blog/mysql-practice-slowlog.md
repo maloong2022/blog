@@ -53,7 +53,7 @@ brew services start mysql
 
 **1. Enter the MySQL shell and run the following command:**
 
-```mysql
+```sql
 set global slow_query_log = 'ON';
 ```
 

@@ -74,7 +74,7 @@ N 叉树由于在读写上的性能优点，以及适配磁盘的访问模式，
 
 假设，我们有一个主键列为 ID 的表，表中有字段 k，并且在 k 上有索引。
 
-```mysql
+```sql
 create table T(
 id int primary key, 
 k int not null, 
@@ -137,7 +137,7 @@ B+ 树为了维护索引有序性，在插入新值的时候需要做必要的�
 
 下面是这个表的初始化语句。
 
-```mysql
+```sql
 create table T (
 ID int primary key,
 k int NOT NULL DEFAULT 0, 
@@ -174,7 +174,7 @@ insert into T values(100,1, 'aa'),(200,2,'bb'),(300,3,'cc'),(500,5,'ee'),(600,6,
 
 假设这个市民表的定义是这样的：
 
-```mysql
+```sql
 CREATE TABLE `tuser` (
   `id` int(11) NOT NULL,
   `id_card` varchar(32) DEFAULT NULL,
@@ -225,7 +225,7 @@ B+ 树这种索引结构，可以利用索引的“最左前缀”，来定位�
 
 我们还是以市民表的联合索引（name, age）为例。如果现在有一个需求：检索出表中“名字第一个字是张，而且年龄是 10 岁的所有男孩”。那么，SQL 语句是这么写的：
 
-```mysql
+```sql
 select * from tuser where name like '张%' and age=10 and ismale=1;
 ```
 
@@ -255,14 +255,14 @@ select * from tuser where name like '张%' and age=10 and ismale=1;
 
 如果你要重建索引 k，你的两个 SQL 语句可以这么写：alter table T drop index k;alter table T add index(k);
 
-```mysql
+```sql
 alter table T drop index k;
 alter table T add index(k);
 ```
 
 如果你要重建主键索引，也可以这么写：
 
-```mysql
+```sql
 alter table T drop primary key;
 alter table T add primary key(id);
 ```
@@ -277,7 +277,7 @@ alter table T add primary key(id);
 
 实际上主键索引也是可以使用多个字段的。DBA 小吕在入职新公司的时候，就发现自己接手维护的库里面，有这么一个表，表结构定义类似这样的：
 
-```mysql
+```sql
 CREATE TABLE `geek` (
   `a` int(11) NOT NULL,
   `b` int(11) NOT NULL,
@@ -296,7 +296,7 @@ CREATE TABLE `geek` (
 
 同事告诉他，是因为他们的业务里面有这样的两种语句：
 
-```mysql
+```sql
 select * from geek where c=N order by a limit 1;
 select * from geek where c=N order by b limit 1;
 ```

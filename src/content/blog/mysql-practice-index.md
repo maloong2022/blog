@@ -10,14 +10,13 @@ tags:
 ogImage: ""
 description: 普通索引和唯一索引，应该怎么选择？MySQL为什么有时候会选错索引？怎么给字符串字段加索引？
 ---
-
 ## Table of contents
 
 ## 普通索引和唯一索引，应该怎么选择？
 
 假设你在维护一个市民系统，每个人都有一个唯一的身份证号，而且业务代码已经保证了不会写入两个重复的身份证号。如果市民系统需要按照身份证号查姓名，就会执行类似这样的 SQL 语句：
 
-```mysql
+```sql
 select name from CUser where id_card = 'xxxxxxxyyyyyyzzzzz';
 ```
 
@@ -27,7 +26,7 @@ select name from CUser where id_card = 'xxxxxxxyyyyyyzzzzz';
 
 假设，我们有一个主键列为 ID 的表，表中有字段 k，并且在 k 上有索引。
 
-```mysql
+```sql
 create table T(
 id int primary key,
 k int not null,
@@ -108,7 +107,7 @@ change buffer 用的是 buffer pool 里的内存，因此不能无限增大。ch
 
 现在，我们要在表上执行这个插入语句：
 
-```mysql
+```sql
 insert into t(id,k) values(id1,k1),(id2,k2);
 ```
 
@@ -170,7 +169,7 @@ insert into t(id,k) values(id1,k1),(id2,k2);
 
 我们先建一个简单的表，表里有 a、b 两个字段，并分别建上索引：
 
-```mysql
+```sql
 CREATE TABLE `t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `a` int(11) DEFAULT NULL,
@@ -185,7 +184,7 @@ CREATE TABLE `t` (
 
 我是用存储过程来插入数据的，这里我贴出来方便你复现：
 
-```mysql
+```sql
 delimiter ;;
 create procedure idata()
 begin
@@ -202,7 +201,7 @@ call idata();
 
 接下来，我们分析一条 SQL 语句：
 
-```mysql
+```sql
 select * from t where a between 10000 and 20000;
 ```
 
@@ -226,7 +225,7 @@ select * from t where a between 10000 and 20000;
 
 下面的三条 SQL 语句，就是这个实验过程。
 
-```mysql
+```sql
 set long_query_time=0;
 select * from t where a between 10000 and 20000; /*Q1*/
 select * from t force index(a) where a between 10000 and 20000;/*Q2*/
@@ -315,7 +314,7 @@ rows 这个字段表示的是预计扫描行数。
 
 依然是基于这个表 t，我们看看另外一个语句：
 
-```mysql
+```sql
 select * from t where (a between 1 and 1000)  and (b between 50000 and 100000) order by b limit 1;
 ```
 
@@ -372,7 +371,7 @@ select * from t where (a between 1 and 1000)  and (b between 50000 and 100000) o
 
 如果你觉得修改语义这件事儿不太好，这里还有一种改法，图是执行效果。
 
-```mysql
+```sql
 select * from  (select * from t where (a between 1 and 1000)  and (b between 50000 and 100000) order by b limit 100)alias limit 1;
 ```
 
@@ -392,7 +391,7 @@ select * from  (select * from t where (a between 1 and 1000)  and (b between 500
 
 假设，你现在维护一个支持邮箱登录的系统，用户表是这么定义的：
 
-```mysql
+```sql
 create table SUser(
 ID bigint unsigned primary key,
 email varchar(64), 
@@ -402,7 +401,7 @@ email varchar(64),
 
 由于要使用邮箱登录，所以业务代码中一定会出现类似于这样的语句：邮箱
 
-```mysql
+```sql
 select f1, f2 from SUser where email='xxx';
 ```
 
@@ -412,7 +411,7 @@ select f1, f2 from SUser where email='xxx';
 
 比如，这两个在 email 字段上创建索引的语句：
 
-```mysql
+```sql
 alter table SUser add index index1(email);
 或
 alter table SUser add index index2(email(6));
@@ -432,7 +431,7 @@ alter table SUser add index index2(email(6));
 
 接下来，我们再看看下面这个语句，在这两个索引定义下分别是怎么执行的。
 
-```mysql
+```sql
 select id,name,email from SUser where email='zhangssxyz@xxx.com';
 ```
 
@@ -465,13 +464,13 @@ select id,name,email from SUser where email='zhangssxyz@xxx.com';
 
 首先，你可以使用下面这个语句，算出这个列上有多少个不同的值：
 
-```mysql
+```sql
 select count(distinct email) as L from SUser;
 ```
 
 然后，依次选取不同长度的前缀来看这个值，比如我们要看一下 4~7 个字节的前缀索引，可以用这个语句：
 
-```mysql
+```sql
 select 
   count(distinct left(email,4))as L4,
   count(distinct left(email,5))as L5,
@@ -488,13 +487,13 @@ from SUser;
 
 你先来看看这个 SQL 语句：
 
-```mysql
+```sql
 select id,email from SUser where email='zhangssxyz@xxx.com';
 ```
 
 与前面例子中的 SQL 语句
 
-```mysql
+```sql
 select id,name,email from SUser where email='zhangssxyz@xxx.com';
 ```
 
@@ -518,7 +517,7 @@ select id,name,email from SUser where email='zhangssxyz@xxx.com';
 
 **第一种方式是使用倒序存储。**如果你存储身份证号的时候把它倒过来存，每次查询的时候，你可以这么写：
 
-```mysql
+```sql
 select field_list from t where id_card = reverse('input_id_card_string');
 ```
 
@@ -526,13 +525,13 @@ select field_list from t where id_card = reverse('input_id_card_string');
 
 **第二种方式是使用 hash 字段。**你可以在表上再创建一个整数字段，来保存身份证的校验码，同时在这个字段上创建索引。
 
-```mysql
+```sql
 alter table t add id_card_crc int unsigned, add index(id_card_crc);
 ```
 
 然后每次插入新记录的时候，都同时用 crc32() 这个函数得到校验码填到这个新字段。由于校验码可能存在冲突，也就是说两个不同的身份证号通过 crc32() 函数得到的结果可能是相同的，所以你的查询语句 where 部分要判断 id_card 的值是否精确相同。
 
-```mysql
+```sql
 select field_list from t where id_card_crc=crc32('input_id_card_string') and id_card='input_id_card_string'
 ```
 

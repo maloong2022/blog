@@ -91,7 +91,7 @@ MySQL 里面表级别的锁有两种：一种是表锁，一种是元数据锁�
 
 MariaDB 已经合并了 AliSQL 的这个功能，所以这两个开源分支目前都支持 DDL NOWAIT/WAIT n 这个语法。
 
-```mysql
+```sql
 ALTER TABLE tbl_name NOWAIT add column ...
 ALTER TABLE tbl_name WAIT N add column ... 
 ```
@@ -192,7 +192,7 @@ MDL 会直到事务提交才释放，在做表结构变更的时候，你一定�
 
 答：假设这个 DDL 是针对表 t1 的， 这里我把备份过程中几个关键的语句列出来：
 
-```mysql
+```sql
 Q1:SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 Q2:START TRANSACTION  WITH CONSISTENT SNAPSHOT；
 /* other tables */
@@ -223,8 +223,6 @@ DDL 从主库传过来的时间按照效果不同，我打了四个时刻。题�
 4. 从“时刻 4”开始，mysqldump 释放了 MDL 读锁，现象：没有影响，备份拿到的是 DDL 前的表结构。
 
 ---
-
-
 
 如果你要删除一个表里面的前 10000 行数据，有以下三种方法可以做到：
 

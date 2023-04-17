@@ -42,7 +42,7 @@ description: 事务就是要保证一组数据库操作，要么全部成功，�
 
 其中“读提交”和“可重复读”比较难理解，所以我用一个例子说明这几种隔离级别。假设数据表 T 中只有一列，其中一行的值为 1，下面是按照时间顺序执行两个事务的行为。
 
-```mysql
+```sql
 create table T(c int) engine=InnoDB;
 insert into T(c) values(1);
 ```
@@ -62,7 +62,7 @@ insert into T(c) values(1);
 
 配置的方式是，将启动参数 transaction-isolation 的值设置成 READ-COMMITTED。你可以用 show variables 来查看当前的值。
 
-```mysql
+```sql
 show variables like 'transaction_isolation';
 ```
 
@@ -123,7 +123,7 @@ show variables like 'transaction_isolation';
 
 你可以在 information_schema 库的 innodb_trx 这个表中查询长事务，比如下面这个语句，用于查找持续时间超过 60s 的事务。
 
-```mysql
+```sql
 select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
 ```
 
@@ -135,7 +135,7 @@ select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx
 
 我给你举一个例子吧。下面是一个只有两行的表的初始化语句。
 
-```mysql
+```sql
 CREATE TABLE `t` ( `id` int(11) NOT NULL, `k` int(11) DEFAULT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
 
 insert into t(id, k) values(1,1),(2,2);
@@ -288,7 +288,7 @@ InnoDB 里面每个事务有一个唯一的事务 ID，叫作 transaction id。�
 
 所以，如果把事务 A 的查询语句 select * from t where id=1 修改一下，加上 lock in share mode 或 for update，也都可以读到版本号是 101 的数据，返回的 k 的值是 3。下面这两个 select 语句，就是分别加了读锁（S 锁，共享锁）和写锁（X 锁，排他锁）。
 
-```mysql
+```sql
 select k from t where id=1 lock in share mode;
 select k from t where id=1 for update;
 ```
@@ -363,7 +363,7 @@ InnoDB 的行数据有多个版本，每个数据版本有自己的 row trx_id�
 
 用下面的表结构和初始化语句作为试验环境，事务隔离级别是可重复读。现在，我要把所有“字段 c 和 id 值相等的行”的 c 值清零，但是却发现了一个“诡异”的、改不掉的情况。请你构造出这种情况，并说明其原理。
 
-```mysql
+```sql
 CREATE TABLE `t` (
   `id` int(11) NOT NULL,
   `c` int(11) DEFAULT NULL,
