@@ -127,11 +127,7 @@ show variables like 'transaction_isolation';
 select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
 ```
 
-
-
 ---
-
-
 
 如果是可重复读隔离级别，事务 T 启动的时候会创建一个视图 read-view，之后事务 T 执行期间，即使有其他事务修改了数据，事务 T 看到的仍然跟在启动时看到的一样。也就是说，一个在可重复读隔离级别下执行的事务，好像与世无争，不受外界影响。
 
@@ -365,8 +361,6 @@ InnoDB 的行数据有多个版本，每个数据版本有自己的 row trx_id�
 
 ---
 
-
-
 用下面的表结构和初始化语句作为试验环境，事务隔离级别是可重复读。现在，我要把所有“字段 c 和 id 值相等的行”的 c 值清零，但是却发现了一个“诡异”的、改不掉的情况。请你构造出这种情况，并说明其原理。
 
 ```mysql
@@ -393,6 +387,6 @@ insert into t(id, c) values(1,1),(2,2),(3,3),(4,4);
 
 怎么解决的呢？
 
-使用“乐观锁”。时常我们会基于version字段对row进行cas式的更新，类似`update ...set ... where id = xxx and version = xxx`。如果version被其他事务抢先更新，则在自己事务中更新失败，trx_id没有变成自身事务的id，同一个事务中再次select还是旧值，就会出现“明明值没变可就是更新不了”的“异象”（anomaly）。解决方案就是每次cas更新不管成功失败，结束当前事务。如果失败则重新起一个事务进行查询更新。
+使用“乐观锁”。时常我们会基于version字段对row进行cas式的更新，类似 `update ...set ... where id = xxx and version = xxx`。如果version被其他事务抢先更新，则在自己事务中更新失败，trx_id没有变成自身事务的id，同一个事务中再次select还是旧值，就会出现“明明值没变可就是更新不了”的“异象”（anomaly）。解决方案就是每次cas更新不管成功失败，结束当前事务。如果失败则重新起一个事务进行查询更新。
 
 上面说的“如果失败就重新起一个事务”，里面判断是否成功的标准是 affected_rows 是不是等于预期值。比如我们这个例子里面预期值本来是4，当然实际业务中这种语句一般是匹配唯一主键，所以预期住值一般是1。
