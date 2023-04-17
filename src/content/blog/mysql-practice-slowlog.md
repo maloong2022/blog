@@ -35,6 +35,13 @@ slow_query_log_file=~/log/mysql/mysql-slow.log
 long_query_time=1
 ```
 
+MySQL访问配置文件位置说明：
+
+```sql
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf 
+```
+
 ### 重启MySQL服务
 
 ```bash
