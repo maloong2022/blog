@@ -12,13 +12,11 @@ ogImage: ""
 description: 如果要做一个数据库路由，都需要做什么技术点？一个数据库路由设计要包括哪些技术知识点呢？
 ---
 * 如果要做一个数据库路由，都需要做什么技术点？
-
 * 一个数据库路由设计要包括哪些技术知识点呢？
 
 ## Table of contents
 
-
-### 需求分析
+## 需求分析
 
 如果要做一个数据库路由，都需要做什么技术点？
 
@@ -41,9 +39,9 @@ description: 如果要做一个数据库路由，都需要做什么技术点？�
 
 综上，可以看到在数据库和表的数据结构下完成数据存放，我需要用到的技术包括：AOP、数据源切换、散列算法、哈希寻址、ThreadLocal以及SpringBoot的Starter开发方式等技术。
 
-### 设计实现
+## 设计实现
 
-#### 定义路由注解
+### 定义路由注解
 
 1. 定义
 
@@ -76,7 +74,7 @@ public interface IUserDao {
 * 首先我们需要自定义一个注解，用于放置在需要被数据库路由的方法上。
 * 它的使用方式是通过方法配置注解，就可以被我们指定的 AOP 切面进行拦截，拦截后进行相应的数据库路由计算和判断，并切换到相应的操作数据源上。
 
-#### 解析路由配置
+### 解析路由配置
 
 ```yml
 # 多数据源路由配置
@@ -108,7 +106,7 @@ mini-db-router:
 * 以上就是我们实现完数据库路由组件后的一个数据源配置，在分库分表下的数据源使用中，都需要支持多数据源的信息配置，这样才能满足不同需求的扩展。
 * 对于这种自定义较大的信息配置，就需要使用到 org.springframework.context.EnvironmentAware 接口，来获取配置文件并提取需要的配置信息。
 
-#### 数据源配置提取
+### 数据源配置提取
 
 ```java
 @Override
@@ -129,7 +127,7 @@ public void setEnvironment(Environment environment) {
 * prefix，是数据源配置的开头信息，你可以自定义需要的开头内容。
 * dbCount、tbCount、dataSources、dataSourceProps，都是对配置信息的提取，并存放到 dataSourceMap 中便于后续使用。
 
-#### 数据源切换
+### 数据源切换
 
 在结合 SpringBoot 开发的 Starter 中，需要提供一个 DataSource 的实例化对象，那么这个对象我们就放在 DataSourceAutoConfig 来实现，并且这里提供的数据源是可以动态变换的，也就是支持动态切换数据源。
 
@@ -158,7 +156,7 @@ public DataSource dataSource() {
 * 这里是一个简化的创建案例，把基于从配置信息中读取到的数据源信息，进行实例化创建。
 * 数据源创建完成后存放到 DynamicDataSource 中，它是一个继承了 AbstractRoutingDataSource 的实现类，这个类里可以存放和读取相应的具体调用的数据源信息。
 
-#### 切面拦截
+### 切面拦截
 
 在 AOP 的切面拦截中需要完成；数据库路由计算、扰动函数加强散列、计算库表索引、设置到 ThreadLocal 传递数据源，整体案例代码如下：
 
@@ -200,7 +198,7 @@ public Object doRouter(ProceedingJoinPoint jp, DBRouter dbRouter) throws Throwab
 * 当计算完总长度上的一个索引位置后，还需要把这个位置折算到库表中，看看总体长度的索引因为落到哪个库哪个表。
 * 最后是把这个计算的索引信息存放到 ThreadLocal 中，用于传递在方法调用过程中可以提取到索引信息。
 
-#### Mybatis 拦截器处理分表
+### Mybatis 拦截器处理分表
 
 * 最开始考虑直接在Mybatis对应的表 INSERT INTO user_strategy_export_${tbIdx} 添加字段的方式处理分表。但这样看上去并不优雅，不过也并不排除这种使用方式，仍然是可以使用的。
 * 那么我们可以基于 Mybatis 拦截器进行处理，通过拦截 SQL 语句动态修改添加分表信息，再设置回 Mybatis 执行 SQL 中。
@@ -256,7 +254,7 @@ public class DynamicMybatisPlugin implements Interceptor {
 * 实现 Interceptor 接口的 intercept 方法，获取StatementHandler、通过自定义注解判断是否进行分表操作、获取SQL并替换SQL表名 USER 为 USER_03、最后通过反射修改SQL语句
 * 此处会用到正则表达式拦截出匹配的sql，(from|into|update)[\\s]{1,}(\\w{1,})
 
-#### 事物处理
+### 事物处理
 
 为了避免多个表数据源进行切换，事物失效，进行了设计。
 
@@ -294,7 +292,6 @@ public Result recordDrawOrder(DrawOrderVO drawOrder){
 }
 ```
 
-
-代码地址
+### 代码地址
 
 [数据库分库分表中间件Github地址](https://github.com/maloong2022/db-router-spring-boot-starter)
