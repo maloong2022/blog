@@ -1,7 +1,7 @@
 ---
 author: Maloong🐎🐲
 pubDatetime: 2023-05-16T23:32:00Z
-title: 卷起来🐎🐲💪 -- DDD
+title: 卷起来🐎🐲💪 -- DDD设计落地
 postSlug: architecture-ddd
 featured: false
 draft: false
@@ -21,7 +21,6 @@ DDD（Domain-Driven Design 领域驱动设计）是由Eric Evans最先提出，�
 
 ### **开发目标**
 
-
 依靠领域驱动设计的设计思想，通过事件风暴建立领域模型，合理划分领域逻辑和物理边界，建立领域对象及服务矩阵和服务架构图，定义符合DDD分层架构思想的代码结构模型，保证业务模型与代码模型的一致性。通过上述设计思想、方法和过程，指导团队按照DDD设计思想完成微服务设计和开发。
 
 1. 拒绝泥球小单体、拒绝污染功能与服务、拒绝一加功能排期一个月
@@ -31,7 +30,6 @@ DDD（Domain-Driven Design 领域驱动设计）是由Eric Evans最先提出，�
 ### **服务架构**
 
 ![](https://s2.loli.net/2023/05/16/Oa7XiZbstAzugM2.png)
-
 
 * 应用层{application}
 
@@ -52,7 +50,6 @@ DDD（Domain-Driven Design 领域驱动设计）是由Eric Evans最先提出，�
 * 接口层{interfaces}
 
   * 接口服务位于用户接口层，用于处理用户发送的Restful请求和解析用户输入的配置文件等，并将信息传递给应用层。
-
 
 ### 项目实战
 
