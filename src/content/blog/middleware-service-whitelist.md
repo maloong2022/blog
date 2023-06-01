@@ -1,8 +1,8 @@
 ---
 author: Maloong🐎🐲
 pubDatetime: 2023-05-30T21::00Z
-title: 卷起来🐎🐲💪 -- MySQL日志系统
-postSlug: mysql-base-logsystem
+title: 卷起来🐎🐲💪 -- 服务治理（统一白名单控制）
+postSlug: middleware-service-whitelist
 featured: false
 draft: false
 tags:
