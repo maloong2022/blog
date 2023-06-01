@@ -103,17 +103,17 @@ public class WhiteListAutoConfigure {
 * @Configuration，可以算作是一个组件注解，在 SpringBoot 启动时可以进行加载创建出 Bean 文件。因为 @Configuration 注解有一个 @Component 注解
 * @ConditionalOnClass(WhiteListProperties.class)，当 WhiteListProperties 位于当前类路径上，才会实例化一个类。除此之外还有其他属于此系列的常用的注解。
 
-1. @ConditionalOnBean 仅仅在当前上下文中存在某个对象时，才会实例化一个 Bean
-2. @ConditionalOnClass 某个 CLASS 位于类路径上，才会实例化一个 Bean
-3. @ConditionalOnExpression 当表达式为 true 的时候，才会实例化一个 Bean
-4. @ConditionalOnMissingBean 仅仅在当前上下文中不存在某个对象时，才会实例化一个 Bean
-5. @ConditionalOnMissingClass 某个 CLASS 类路径上不存在的时候，才会实例化一个 Bean
+  1. @ConditionalOnBean 仅仅在当前上下文中存在某个对象时，才会实例化一个 Bean
+  2. @ConditionalOnClass 某个 CLASS 位于类路径上，才会实例化一个 Bean
+  3. @ConditionalOnExpression 当表达式为 true 的时候，才会实例化一个 Bean
+  4. @ConditionalOnMissingBean 仅仅在当前上下文中不存在某个对象时，才会实例化一个 Bean
+  5. @ConditionalOnMissingClass 某个 CLASS 类路径上不存在的时候，才会实例化一个 Bean
 
 * @Bean，在 whiteListConfig 方法上我们添加了这个注解以及方法入参 WhiteListProperties properties。这里面包括如下几个内容：
 
-1. properties 配置会被注入进来，当然你也可以选择使用 @Autowired 的方式配置注入在使用属性。
-2. 整个方法会在配置信息和Bean注册完成后，开始被实例化加载到 Spring 中。
-3. @ConditionalOnMissingBean，现在就用到了这个方法上，代表只会实例化一个 Bean 对象。
+  1. properties 配置会被注入进来，当然你也可以选择使用 @Autowired 的方式配置注入在使用属性。
+  2. 整个方法会在配置信息和Bean注册完成后，开始被实例化加载到 Spring 中。
+  3. @ConditionalOnMissingBean，现在就用到了这个方法上，代表只会实例化一个 Bean 对象。
 
 ### 切面逻辑实现
 
