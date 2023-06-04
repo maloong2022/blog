@@ -50,7 +50,7 @@ whereas if you've practiced in your free time answering questions that you haven
 prepared for, you quick thinking will be better, you'll be better able to answer
 these questions in a fluent way.
 
-### How to speak logically and coherently?
+## How to speak logically and coherently?
 
 So, another aspect of the speaking test is coherence and details, And the main
 thing to remember here is to have a good structure.
@@ -93,7 +93,7 @@ prepared for, and they've tried to fit their prepared answer into that question,
 when it's not suitable. And that's gonna bring down their score. So be very
 careful about this.
 
-### What to say if you don't understand the question?
+## What to say if you don't understand the question?
 
 If you don't understand the question, it's always good to check with the
 examiner. Some students might think, ah, that will make my score go lower, but it
@@ -108,7 +108,7 @@ the question, but there is still a word that you don't understand, then you coul
 say something like,"I'm sorry I'm not familiar with the word '...', please could
 you explain it?please could you rephrase it" That's also ok.
 
-### How to avoid long pauses.
+## How to avoid long pauses.
 
 Another aspect is long pauses. This happens a lot in the speaking test, but in
 order to deal with this, try to speak while you're thinking. And this is also
