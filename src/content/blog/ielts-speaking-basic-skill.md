@@ -1,6 +1,6 @@
 ---
 author: Maloong🐎🐲
-pubDatetime: 2023-05-03T14:21:00Z
+pubDatetime: 2023-06-04T14:21:00Z
 title: IELTS🐎🐲💪 -- The Basic Skill of IELTS Speaking Test
 postSlug: ielts-speaking-basic-skill
 featured: false
@@ -16,7 +16,6 @@ description: How to improve fluency? How to speak logically and coherently.What 
 4. How to avoid long pauses.
 
 ## Table of contents
-
 
 ## How to improve fluency?
 
