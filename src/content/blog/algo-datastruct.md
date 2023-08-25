@@ -358,4 +358,562 @@ public void insertionSort(int[] array){
 
 When a thing is defined in terms of itself. - Wikipedia. Apply the result of a
 procedure, to a procedure. A recursive method calls itself. Can be a substitute
-for iterat
+for iteration.
+
+Divide a problem into sub-problems of the same type as the original. Commonly
+used with advanced sorting algorithms and navigating trees.
+
+### Advantages
+
+1. easier to read/write
+2. easier to debug
+
+### Disadvantage
+
+1. sometimes slower
+2. uses more memory
+
+|                  | **iteration**                   | **recursion**                    |
+| ---------------- | ------------------------------- | -------------------------------- |
+| **implemention** | uses loops                      | calls iteself                    |
+| **state**        | control index (int steps = 0)   | parameter values walk(int steps) |
+| **progression**  | moves toward value in condition | converge towards base case       |
+| **termination**  | index satisfies condition       | base case = true                 |
+| **size**         | more code less memory           | less code more momery            |
+| **speed**        | faster                          | slower                           |
+
+## Merge sort
+
+<video src="https://drive.google.com/file/d/1frkE1AmPgeA-vxSQ0GiNn22HEvr0nqMR/view" controls="controls">
+</video>
+
+recursively divide array in 2, sort, re-combine.
+
+- run-time complexity = O(nlog(n))
+- space complexity = O(n);
+
+![Space Used](https://s2.loli.net/2023/08/25/wbrqYjkdUJVmH8R.png)
+
+```java
+public void mergeSort(int[] array){
+    int length = array.length;
+    if(length<=1) return; // base case
+
+    int middle = length / 2;
+    int[] leftArray = new int[middle];
+    int[] rightArray = new int[length-middle];
+
+    int i=0,l=0,r=0// indices
+
+    // copy elements to right and left array
+    for(;i<length;i++){
+        if(i<middle){
+            leftArray[l] = array[i];
+            l++
+        }else{
+            rightArray[r] = array[i];
+            r++;
+        }
+    }
+
+    mergeSort(leftArray):
+    mergeSort(rightArray);
+    // merge
+    merge(leftArray,rightArray,array);
+
+
+}
+
+public void merge(int[] leftArray, int[] rightArray, int[] array){
+    int leftSize = leftArray.length;
+    int rightSize = rightArray.length;
+    int i = 0, l = 0, r = 0; // indices
+
+    //check the conditions for merging
+    while(l < leftSize && r < rightSize){
+        if(leftArray[l] < rightArray[r]){
+            array[i] = leftArray[l];
+            i++;
+            l++;
+        }else{
+            array[i] = rightArray[r];
+            i++;
+            r++;
+        }
+    }
+    while(l < leftSize){
+        array[i] = leftArray[l];
+        i++;
+        l++;
+    }
+    while(r < rightSize){
+        array[i] = rightArray[r];
+        i++;
+        r++;
+    }
+}
+```
+
+## Quick sort
+
+<video src="https://drive.google.com/file/d/1Znkjws2-WZV_Uq3KzlDNUF9rsKBFMsYG/view" controls="controls">
+</video>
+
+Moves smaller elements to left of a pivot. recursively divide array in 2 partitions
+
+- run-time complexity = Best case O(n(log(n))). Average case O(nlog(n)), worst
+  case O(n^2) if already sorted
+- space complexity = O(log(n)) due to recursion
+
+```java
+public void quickSort(int[] array, int start, int end) {
+    if(end <= start) return;// base case
+
+    int pivotIndex = partition(array, start, end);
+    quickSort(array, start,pivotIndex-1);
+    quickSort(array,pivotIndex+1,end);
+
+
+}
+
+public  int partition(int[] array, int start, int end) {
+    int pivot = array[end];
+    int i = start - 1;
+
+    for(int j = start; j< end;j++){
+        if(array[j] < pivot){
+            i++;
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+    // deal with the end element
+    i++;
+    int temp = array[i];
+    array[i] = array[end];
+    array[end] = temp;
+
+    return i;
+}
+```
+
+## Hashtable
+
+A data structure that stores unique keys to values. Each key/value pair is known
+as an Entry.
+
+- FAST insertion, look up, deletion of key/value Pairs
+- Not ideal for small data sets, great with large data sets
+
+1. hashing = takes a key and computers an integer (formula will vary based on key&
+   data type), In a Hashtable, we use the hash % capacity to calculate an index
+   number `key.hashCode() % capcity = index`
+
+2. bucket = an indexed storage location for one or more Entries can store multiple
+   Entries in case of a collision(linked similarly a LinkedList)
+
+3. collision = hash function generates the same index for more than one key
+4. less collisions = more efficiency
+
+- Runtime complexity: Best case O(1), Worst case O(n)
+
+## Undirected Graph
+
+![Undirected Graph](https://s2.loli.net/2023/08/25/5d9zXJHtYhaOA2K.png)
+
+![Directed Graph](https://s2.loli.net/2023/08/25/vSX1f2YUd5LyA4q.png)
+
+![Graph Store](https://s2.loli.net/2023/08/25/vRt1e9U6a2XcCMG.png)
+
+### Adjacency Matrix
+
+![Adjacency Matrix](https://s2.loli.net/2023/08/25/p8lT9tCXkQMruPI.png)
+
+A 2D array to store 1's/0's to represent edges, # of rows = # of unique nodes; # of
+columns = # of unique nodes
+
+- runtime complexity to check an Edge: O(1)
+- space complexity: O(v^2)
+
+![Example](https://s2.loli.net/2023/08/25/ZHGxIPr5aLRqlMy.png)
+
+```java
+public class Node {
+    char data;
+    Node(char data){
+        this.data = data;
+    }
+}
+
+public class Graph{
+    ArrayList<Node> nodes;
+    int[][] matrix;
+
+    Graph(int size){
+        nodes = new ArrayList<>();
+        matrix = new int[size][size];
+    }
+
+    public void addNode(Node node){
+        nodes.add(node);
+    }
+    public void addEdge(int src, int dst){
+        matrix[src][dst] = 1;
+
+    }
+    public boolean checkEdge(int src, int dst){
+        return matrix[src][dst] == 1;
+    }
+
+    public void print(){
+        System.out.print("  ");
+        for(Node node: nodes){
+            System.out.print(node.data+ " ");
+        }
+        System.out.println();
+        for(int i =0;i<matrix.length;i++){
+            System.out.print(nodes.get(i).data + " ");
+            for (int j=0; j<matrix[i].length;j++){
+                System.out.print(matrix[i][j] +" ");
+            }
+            System.out.println();
+        }
+
+    }
+}
+
+public class Main {
+    public static void main(String[] arg){
+        Graph graph = new Graph(5);
+
+        graph.addNode(new Node('A'));
+        graph.addNode(new Node('B'));
+        graph.addNode(new Node('C'));
+        graph.addNode(new Node('D'));
+        graph.addNode(new Node('E'));
+
+        graph.addEdge(0,1);
+        graph.addEdge(1,2);
+        graph.addEdge(1,4);
+        graph.addEdge(2,3);
+        graph.addEdge(2,4);
+        graph.addEdge(4,2);
+        graph.addEdge(4,0);
+
+        graph.print();
+
+        System.out.println(graph.checkEdge(1,4));
+
+    }
+}
+```
+
+### Adjacency List
+
+![Adjacency List](https://s2.loli.net/2023/08/25/kzqxiIAr7Z6nRmT.png)
+
+An array/arraylist of linkedlists. Each LinkedList has a unique node at the head.
+All adjacent neighbors to that node are add to that node's linkedlist.
+
+- runtime complexity to check an Edge: O(v)
+- space complexity: O(v+e)
+
+```java
+public class Node {
+    char data;
+    Node(char data){
+        this.data = data;
+    }
+}
+
+public class Graph{
+    ArrayList<LinkedList<Node>> alist;
+
+    Graph() {
+        alist = new ArrayList<>();
+    }
+
+    public void addNode(Node node) {
+        LinkedList<Node> currentList = new LinkedList<Node>();
+        currentList.add(node);
+        alist.add(currentList);
+    }
+
+    public void addEdge(int src, int dst) {
+        LinkedList<Node> currentList = alist.get(src);
+        Node dstNode = alist.get(dst).get(0);
+        currentList.add(dstNode);
+    }
+
+    public boolean checkEdge(int src, int dst) {
+        LinkedList<Node> currentList = alist.get(src);
+        Node dstNode = alist.get(dst).get(0);
+        for (Node node : currentList) {
+            if (node == dstNode) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void print() {
+        for (LinkedList<Node> currentList : alist) {
+            for (Node node : currentList) {
+                System.out.print(node.data + "->");
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] arg){
+        Graph graph = new Graph(5);
+
+        graph.addNode(new Node('A'));
+        graph.addNode(new Node('B'));
+        graph.addNode(new Node('C'));
+        graph.addNode(new Node('D'));
+        graph.addNode(new Node('E'));
+
+        graph.addEdge(0,1);
+        graph.addEdge(1,2);
+        graph.addEdge(1,4);
+        graph.addEdge(2,3);
+        graph.addEdge(2,4);
+        graph.addEdge(4,2);
+        graph.addEdge(4,0);
+
+        graph.print();
+
+        System.out.println(graph.checkEdge(1,4));
+
+    }
+}
+
+```
+
+## Depth First Search
+
+<video src="https://drive.google.com/file/d/1UwEZuGeYMBS4ohQOkLFdA_7UqVu1Z0DF/view" controls="controls">
+</video>
+
+DFS = a search algorithm for traversing a tree or graph data structure.
+
+1. Pick a route
+2. Keep going until you reach a dead end,or a previously visited node
+3. Backrtrack to last node that has unvisited adjacent neighbors
+
+![Example](https://s2.loli.net/2023/08/26/sxnNCBMQOJDzp9d.png)
+
+```java
+public class Node {
+    char data;
+    boolean visited;
+    Node(char data){
+        this.data = data;
+    }
+}
+
+public class Graph {
+    ArrayList<Node> nodes;
+    int[][] matrix;
+
+    Graph(int size){
+        nodes = new ArrayList<>();
+        matrix = new int[size][size];
+    }
+
+    public void addNode(Node node){
+        nodes.add(node);
+    }
+    public void addEdge(int src, int dst){
+        matrix[src][dst] = 1;
+
+    }
+    public boolean checkEdge(int src, int dst){
+        return matrix[src][dst] == 1;
+    }
+
+    public void print(){
+        System.out.print("  ");
+        for(Node node: nodes){
+            System.out.print(node.data+ " ");
+        }
+        System.out.println();
+        for(int i =0;i<matrix.length;i++){
+            System.out.print(nodes.get(i).data + " ");
+            for (int j=0; j<matrix[i].length;j++){
+                System.out.print(matrix[i][j] +" ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public void depthFirstSearch(int src){
+        boolean[] visited = new boolean[matrix.length];
+        dFSHelper(src,visited);
+    }
+
+    private void dFSHelper(int src, boolean[] visited) {
+        if(visited[src]) {
+            return;
+        }else{
+            visited[src] = true;
+            System.out.println(nodes.get(src).data + " = visited");
+        }
+        for (int i = 0; i < matrix[src].length; i++) {
+            if(matrix[src][i] == 1){
+                dFSHelper(i,visited);
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Graph graph = new Graph(5);
+
+        graph.addNode(new Node('A'));
+        graph.addNode(new Node('B'));
+        graph.addNode(new Node('C'));
+        graph.addNode(new Node('D'));
+        graph.addNode(new Node('E'));
+
+        graph.addEdge(0,1);
+        graph.addEdge(1,2);
+        graph.addEdge(1,4);
+        graph.addEdge(2,3);
+        graph.addEdge(2,4);
+        graph.addEdge(4,2);
+        graph.addEdge(4,0);
+
+        graph.print();
+
+        System.out.println(graph.checkEdge(1,2));
+        graph.depthFirstSearch(3);
+
+    }
+}
+```
+
+## Breadth First Search
+
+<video src="https://drive.google.com/file/d/1EEOWh4jrWgxm_Oqt9j6QfH8MmdmWmEFS/view" controls="controls">
+</video>
+
+BFS = a search algorithm for traversing a tree or graph data structure. This is
+done one "level" at a time, rather than one "branch" at a time.
+
+```java
+public class Node {
+    char data;
+    boolean visited;
+    Node(char data){
+        this.data = data;
+    }
+}
+
+public class Graph {
+    ArrayList<Node> nodes;
+    int[][] matrix;
+
+    Graph(int size){
+        nodes = new ArrayList<>();
+        matrix = new int[size][size];
+    }
+
+    public void addNode(Node node){
+        nodes.add(node);
+    }
+    public void addEdge(int src, int dst){
+        matrix[src][dst] = 1;
+
+    }
+    public boolean checkEdge(int src, int dst){
+        return matrix[src][dst] == 1;
+    }
+
+    public void print(){
+        System.out.print("  ");
+        for(Node node: nodes){
+            System.out.print(node.data+ " ");
+        }
+        System.out.println();
+        for(int i =0;i<matrix.length;i++){
+            System.out.print(nodes.get(i).data + " ");
+            for (int j=0; j<matrix[i].length;j++){
+                System.out.print(matrix[i][j] +" ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public void breadthFirstSearch(int src){
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[matrix.length];
+
+        queue.offer(src);
+        visited[src] = true;
+        while(!queue.isEmpty()){
+            src = queue.poll();
+            System.out.println(nodes.get(src).data + " =  visited");
+
+            for (int i = 0; i < matrix[src].length; i++) {
+                if(matrix[src][i] == 1 && !visited[i]){
+                    queue.offer(i);
+                    visited[i] = true;
+                }
+
+            }
+        }
+
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Graph graph = new Graph(5);
+
+        graph.addNode(new Node('A'));
+        graph.addNode(new Node('B'));
+        graph.addNode(new Node('C'));
+        graph.addNode(new Node('D'));
+        graph.addNode(new Node('E'));
+
+        graph.addEdge(0,1);
+        graph.addEdge(1,2);
+        graph.addEdge(1,4);
+        graph.addEdge(2,3);
+        graph.addEdge(2,4);
+        graph.addEdge(4,2);
+        graph.addEdge(4,0);
+
+        graph.print();
+
+        System.out.println(graph.checkEdge(1,2));
+        graph.breadthFirstSearch(2);
+
+    }
+}
+
+```
+
+Breadth FS = Traverse a graph level by level, Utilizes a Queue, Better if destination
+is on average close to start, Siblings are visited before children
+
+Depth FS = Traverse a graph branch by branch, Utilizes a Stack, Better if destination
+is on average far from the start. children are visited before siblings, More popular
+for games/puzzles
+
+## Tree
+
+<video src="https://drive.google.com/file/d/1KwKmHsTyRvb75fl-6weVhI_ueY8dVCM9/view" controls="controls">
+</video>
+
+tree = a non-linear data structure where nodes are organized in a hierarchy.
+
+![tree](https://s2.loli.net/2023/08/26/N4qJUiYAVCQpIa6.png)
