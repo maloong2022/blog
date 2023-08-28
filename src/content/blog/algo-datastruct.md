@@ -197,8 +197,7 @@ Slow for large data sets
 
 ## Binary search
 
-<video src="https://drive.google.com/file/d/1vNyfL_yit6OjUilijhVG7q9aoumhTLvl/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1vNyfL_yit6OjUilijhVG7q9aoumhTLvl/view)
 
 Search algorithm that finds the position of a target value within a **sorted array**.
 Half of the array is eliminated during each "step";
@@ -273,8 +272,7 @@ public int interpolationSearch(int[] array, int value){
 
 ## Bubble sort
 
-<video src="https://drive.google.com/file/d/1DI1hhoAJcxeufizAyEPiHh8Wzfe484Rw/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1DI1hhoAJcxeufizAyEPiHh8Wzfe484Rw/view)
 
 Pairs of adjacent elements are compared, and the elements swapped if they are
 not in order.
@@ -299,8 +297,7 @@ public void bubbleSort(int[] array){
 
 ## Selection sort
 
-<video src="https://drive.google.com/file/d/1Jhtp0Hz7vSi7uC9qGjXc51HRSHZKqITm/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1Jhtp0Hz7vSi7uC9qGjXc51HRSHZKqITm/view)
 
 search throgh an array and keep track of the minimum value during each interation,
 At the end of each iteration, we swap variables.
@@ -328,8 +325,7 @@ public void selectionSort(int[] array){
 
 ## Insertion sort
 
-<video src="https://drive.google.com/file/d/1ilD3t83Znove_Pe4ho-xmpHMdd1BLkQ5/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1ilD3t83Znove_Pe4ho-xmpHMdd1BLkQ5/view)
 
 After comaring elements to the left shift elements to the right to make room to
 insert a value
@@ -384,8 +380,7 @@ used with advanced sorting algorithms and navigating trees.
 
 ## Merge sort
 
-<video src="https://drive.google.com/file/d/1frkE1AmPgeA-vxSQ0GiNn22HEvr0nqMR/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1frkE1AmPgeA-vxSQ0GiNn22HEvr0nqMR/view)
 
 recursively divide array in 2, sort, re-combine.
 
@@ -456,8 +451,7 @@ public void merge(int[] leftArray, int[] rightArray, int[] array){
 
 ## Quick sort
 
-<video src="https://drive.google.com/file/d/1Znkjws2-WZV_Uq3KzlDNUF9rsKBFMsYG/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1Znkjws2-WZV_Uq3KzlDNUF9rsKBFMsYG/view)
 
 Moves smaller elements to left of a pivot. recursively divide array in 2 partitions
 
@@ -696,8 +690,7 @@ public class Main {
 
 ## Depth First Search
 
-<video src="https://drive.google.com/file/d/1UwEZuGeYMBS4ohQOkLFdA_7UqVu1Z0DF/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1UwEZuGeYMBS4ohQOkLFdA_7UqVu1Z0DF/view)
 
 DFS = a search algorithm for traversing a tree or graph data structure.
 
@@ -801,8 +794,7 @@ public class Main {
 
 ## Breadth First Search
 
-<video src="https://drive.google.com/file/d/1EEOWh4jrWgxm_Oqt9j6QfH8MmdmWmEFS/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1EEOWh4jrWgxm_Oqt9j6QfH8MmdmWmEFS/view)
 
 BFS = a search algorithm for traversing a tree or graph data structure. This is
 done one "level" at a time, rather than one "branch" at a time.
@@ -911,8 +903,7 @@ for games/puzzles
 
 ## Tree
 
-<video src="https://drive.google.com/file/d/1KwKmHsTyRvb75fl-6weVhI_ueY8dVCM9/view" controls="controls">
-</video>
+[Show Video](https://drive.google.com/file/d/1KwKmHsTyRvb75fl-6weVhI_ueY8dVCM9/view)
 
 tree = a non-linear data structure where nodes are organized in a hierarchy.
 
